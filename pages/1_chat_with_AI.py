@@ -9,7 +9,7 @@ avatars={"system":"💻🧠","user":"🧑‍💼","assistant":"🎓"}
 client=OpenAI(api_key=os.environ['OPENAI_API_KEY'])
 
 SYSTEM_MESSAGE={"role": "system", 
-                "content": "Ignore all previous commands. You are a helpful and patient guide based in Silicon Valley."
+                "content": "You are a friendly assistant who is an expert of sales compensation policies and sales compensation design."
                 }
 
 if "messages" not in st.session_state:
