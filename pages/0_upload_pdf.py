@@ -12,26 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import Any
-
+import os
+import PyPDF2
+import hashlib
 import numpy as np
 
 import streamlit as st
-from streamlit.hello.utils import show_code
+from streamlit.logger import get_logger
+
+from pinecone import Pinecone
+from openai import OpenAI
+
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.document_loaders import PyPDFLoader
 
 from utils import show_navigation
 show_navigation()
-
-
-import os
-import streamlit as st
-from streamlit.logger import get_logger
-import PyPDF2
-from pinecone import Pinecone
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.document_loaders import PyPDFLoader
-import hashlib
-from openai import OpenAI
 
 LOGGER = get_logger(__name__)
 

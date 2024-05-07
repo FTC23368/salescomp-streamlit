@@ -12,9 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import inspect
-import textwrap
-
 import streamlit as st
 
 def show_navigation():
@@ -25,14 +22,3 @@ def show_navigation():
         col3.page_link("pages/1_chat_with_AI.py", label="Chat", icon="2️⃣")
         col4.page_link("pages/2_retreival_augmented_chat.py", label="RAG", icon="🌎")
         col5.page_link("pages/3_unstructured.py", label="Unstructured")
-
-
-def show_code(demo):
-    """Showing the code of the demo."""
-    show_code = st.sidebar.checkbox("Show code", True)
-    if show_code:
-        # Showing the code of the demo.
-        st.markdown("## Code")
-        sourcelines, _ = inspect.getsourcelines(demo)
-        st.code(textwrap.dedent("".join(sourcelines[1:])))
-        
