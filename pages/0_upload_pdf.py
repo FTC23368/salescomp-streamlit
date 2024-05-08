@@ -33,8 +33,7 @@ def pdf_to_text(uploaded_file):
     return text
 
 def embed(text,filename):
-    pc = Pinecone(api_key = st.secrets["PINECONE_API_KEY"])
-    #pinecone.init(api_key=PINECONE_API_KEY, environment=PINECONE_API_ENV)
+    pc = Pinecone(api_key=st.secrets['PINECONE_API_KEY'])
     index = pc.Index(PINECONE_INDEX_NAME)
     text_splitter = RecursiveCharacterTextSplitter(chunk_size = 1000,chunk_overlap  = 200,length_function = len,is_separator_regex = False)
     docs=text_splitter.create_documents([text])
@@ -45,16 +44,10 @@ def embed(text,filename):
         index.upsert([(hash,embedding,metadata)])
     return
 
-def run():
-    st.set_page_config(
-        page_title="Hello",
-        page_icon="👋",
-    )
-
 #
 # Direcly access Text Input    
 #
-st.markdown("Upload text directly")
+st.markdown("# Upload text directly")
 uploaded_text = st.text_area("Enter Text","")
 if st.button('Process and Upload Text'):
     embedding = embed(uploaded_text,"Anonymous")
@@ -68,6 +61,3 @@ if uploaded_file is not None:
     if st.button('Process and Upload File'):
         pdf_text = pdf_to_text(uploaded_file)
         embedding = embed(pdf_text,uploaded_file.name)
-    st.write("# Welcome to Streamlit! 👋")
-
-    st.sidebar.success("Select a demo above.")
