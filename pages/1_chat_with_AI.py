@@ -1,12 +1,12 @@
-from openai import OpenAI
 import os
 import streamlit as st
+from openai import OpenAI
 
 from utils import show_navigation
 show_navigation()
 
 avatars={"system":"💻🧠","user":"🧑‍💼","assistant":"🎓"}
-client=OpenAI(api_key=os.environ['OPENAI_API_KEY'])
+client=OpenAI(api_key=st.secrets['OPENAI_API_KEY'])
 
 SYSTEM_MESSAGE={"role": "system", 
                 "content": "You are a friendly assistant who is an expert of sales compensation policies and sales compensation design."
@@ -22,7 +22,7 @@ for message in st.session_state.messages:
         with st.chat_message(message["role"], avatar=avatar):
             st.markdown(message["content"])
 
-if prompt := st.chat_input("What is up?"):
+if prompt := st.chat_input("What's up?"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user", avatar=avatars["user"]):
         st.markdown(prompt)
