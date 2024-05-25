@@ -13,6 +13,7 @@ PINECONE_API_KEY=st.secrets['PINECONE_API_KEY']
 PINECONE_API_ENV=st.secrets['PINECONE_API_ENV']
 PINECONE_INDEX_NAME=st.secrets['PINECONE_INDEX_NAME']
 
+avatars={"system":"💻🧠","user":"🧑‍💼","assistant":"🎓"}
 client=OpenAI(api_key=st.secrets['OPENAI_API_KEY'])
 
 SYSTEM_MESSAGE={"role": "system", 
@@ -37,7 +38,8 @@ if "messages" not in st.session_state:
 
 for message in st.session_state.messages:
     if message["role"] != "system":
-        with st.chat_message(message["role"]):
+        avatar=avatars[message["role"]]
+        with st.chat_message(message["role"], avatar=avatar):
             st.markdown(message["content"])
 
 if prompt := st.chat_input("What is up?"):
@@ -48,9 +50,10 @@ Please guide the user with the following information:
 The user's question was: {prompt}
     """
     st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
+        
+    with st.chat_message("user", avatar=avatars["user"]):
         st.markdown(prompt)
-    with st.chat_message("assistant"):
+    with st.chat_message("assistant", avatar=avatars["assistant"]):
         message_placeholder = st.empty()
         full_response = ""
         
