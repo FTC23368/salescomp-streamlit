@@ -1,4 +1,7 @@
 # Home.py
+import sys
+import os
+sys.path.append(os.path.dirname(sys.executable))
 import streamlit as st
 
 from utils import show_navigation
